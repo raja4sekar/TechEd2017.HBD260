@@ -6,44 +6,9 @@ provider: 'SAP TechEd'
 copyright: 'SAP TechEd'
 
 modules:
-  - name: js
-    type: nodejs
-    path: js
-    properties:
-      UAA_SERVICE_NAME: hbd260-uaa
-    provides:
-      - name: js_api
-        properties:
-          url: '${default-url}'
-    requires:
-      - name: hbd260-uaa
-      - name: CentralDB
-    description: Node.js Module - Main work of this workshop is done here
+  
 
-  - name: web
-    type: html5
-    path: web
-    provides:
-      - name: hbd260-web
-        properties:
-          ui-url: '${default-url}'    
-    parameters:
-      host: hbd260-web
-      register-service-url: true
-      service-name: hdb260-web
-      service-url: '${default-url}'          
-    requires:
-      - name: hbd260-uaa
-      - name: ui5-lib
-        properties:
-          ui5liburl: '~{url}'      
-      - name: js_api
-        group: destinations
-        properties:
-          name: js_api
-          url: '~{url}'
-          forwardAuthToken: true      
-    description: Web Module - this holds the SAPUI5 frontend content and provides the UAA authentication and reverse proxy for the Node.js module
+  
 
 resources:
   - name: CentralDB
