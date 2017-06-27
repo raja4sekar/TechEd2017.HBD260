@@ -2,9 +2,8 @@ ID: TechEd2017.HBD260
 _schema-version: '2.0'
 description: TechEd 2017 HBD260 Introduction to Node.js
 version: 1.0.2017
-provider: 'SAP TechEd'
-copyright: 'SAP TechEd'
-
+provider: SAP TechEd
+copyright: SAP TechEd
 modules:
   - name: js
     type: nodejs
@@ -18,33 +17,32 @@ modules:
     requires:
       - name: hbd260-uaa
       - name: CentralDB
+      - name: CROSS_SCHEMA_SFLIGHT
     description: Node.js Module - Main work of this workshop is done here
-
   - name: web
     type: html5
     path: web
     provides:
       - name: hbd260-web
         properties:
-          ui-url: '${default-url}'    
+          ui-url: '${default-url}'
     parameters:
       host: hbd260-web
       register-service-url: true
       service-name: hdb260-web
-      service-url: '${default-url}'          
+      service-url: '${default-url}'
     requires:
       - name: hbd260-uaa
       - name: ui5-lib
         properties:
-          ui5liburl: '~{url}'      
+          ui5liburl: '~{url}'
       - name: js_api
         group: destinations
         properties:
           name: js_api
           url: '~{url}'
-          forwardAuthToken: true      
+          forwardAuthToken: true
     description: Web Module - this holds the SAPUI5 frontend content and provides the UAA authentication and reverse proxy for the Node.js module
-
 resources:
   - name: CentralDB
     type: org.cloudfoundry.existing-service
@@ -52,14 +50,16 @@ resources:
       service-name: teched-2017-container
     properties:
       central-db-name: '${service-name}'
-
   - name: hbd260-uaa
     type: com.sap.xs.uaa
     parameters:
       config-path: ./xs-security.json
-
   - name: ui5-lib
     type: configuration
     parameters:
       provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV3:sapui5_fesv3'
       version: '>=1.44.0'
+  - name: CROSS_SCHEMA_SFLIGHT
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: CROSS_SCHEMA_SFLIGHT
