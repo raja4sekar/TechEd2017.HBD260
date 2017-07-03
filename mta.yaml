@@ -18,6 +18,7 @@ modules:
     requires:
       - name: hbd260-uaa
       - name: CentralDB
+      - name: CROSS_SCHEMA_SFLIGHT      
     description: Node.js Module - Main work of this workshop is done here
 
   - name: web
@@ -63,3 +64,8 @@ resources:
     parameters:
       provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV3:sapui5_fesv3'
       version: '>=1.44.0'
+
+  - name: CROSS_SCHEMA_SFLIGHT
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: CROSS_SCHEMA_SFLIGHT
