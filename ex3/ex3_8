@@ -1,0 +1,27 @@
+app.get("/hdb", function(req, res) {
+		var client = req.db;
+		client.prepare(
+			"SELECT FROM PurchaseOrder.Item { " +
+			" POHeader.PURCHASEORDERID as \"PurchaseOrderId\", " +
+			" PRODUCT as \"ProductID\", " +
+			" GROSSAMOUNT as \"Amount\" " +
+			" } ",
+			function(err, statement) {
+				if (err) {
+					res.type("text/plain").status(500).send("ERROR: " + err.toString());
+					return;
+				}
+				statement.exec([],
+					function(err, results) {
+						if (err) {
+							res.type("text/plain").status(500).send("ERROR: " + err.toString());
+							return;
+						} else {
+							var result = JSON.stringify({
+								PurchaseOrders: results
+							});
+							res.type("application/json").status(200).send(result);
+						}
+					});
+			});
+	});
