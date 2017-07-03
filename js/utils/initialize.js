@@ -60,6 +60,15 @@ module.exports = {
 			console.log("[WARN]", err.message);
 		}
 
+		//Add SQLCC
+		try {
+			options.hana.sqlcc = xsenv.getServices({
+				"xsjs.sqlcc_config": "CROSS_SCHEMA_SFLIGHT"
+			});
+		} catch (err) {
+			console.log("[WARN]", err.message);
+		}
+		
 		// configure UAA
 		try {
 			options = Object.assign(options, xsenv.getServices({
