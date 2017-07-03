@@ -2,11 +2,11 @@ function po_create_before_exit(param) {
     $.trace.error("Start of Exit");
     var after = param.afterTableName;
     var pStmt = null;
-    var poid = '';
+    var poid = "";
    
     try {
         pStmt = param.connection
-        		 .prepareStatement('select "purchaseOrderSeqId".NEXTVAL from "DUMMY"');
+        		 .prepareStatement("select \"purchaseOrderSeqId\".NEXTVAL from \"DUMMY\"");
         var rs = pStmt.executeQuery();
         while (rs.next()) {
            	poid = rs.getInteger(1);
