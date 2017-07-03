@@ -49,7 +49,7 @@ function objectsBasic(){
 		query = "SELECT * FROM \"PO.Header\" "
 			+ " WHERE PURCHASEORDERID = ?";
 		pstmt = conn.prepareStatement(query);
-		pstmt.setString(1, purchaseOrderID);
+		pstmt.setInteger(1, purchaseOrderID);
 		rs = pstmt.executeQuery();
 
 		
@@ -68,10 +68,10 @@ function objectsBasic(){
 	}
 	
 	
-	var po = new purchaseOrder("0300000000");
+	var po = new purchaseOrder(300000000);
 	body +=  "Purchase Order: " + po.purchaseOrderID + " Gross Amount: "+ po.grossAmount + " Discount Amount: "+ po.discount() +"</p>";
 	
-	po = new purchaseOrder("0300000001");
+	po = new purchaseOrder(300000001);
 	body +=  "Purchase Order: " + po.purchaseOrderID + " Gross Amount: "+ po.grossAmount + " Discount Amount: "+ po.discount() +"</p>";
 	
 	$.response.status = $.net.http.OK;
